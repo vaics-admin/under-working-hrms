@@ -39,8 +39,13 @@ const ProfilePictureUpload = () => {
     };
 
     const handleReupload = () => {
+        // Reset the file and preview
         setFile(null);
         setPreviewUrl('');
+        
+        // Clear the file input field manually by getting the file input element
+        const fileInput = document.getElementById('profile_picture');
+        fileInput.value = ''; // Clear the file input
     };
 
     return (
