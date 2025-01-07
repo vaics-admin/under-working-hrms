@@ -1,0 +1,24 @@
+.file-preview-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .file-preview-table th,
+  .file-preview-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    min-width: 100px;
+  }
+  
+  .file-preview-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .file-preview-table td {
+    background-color: #fff;
+  }
+  

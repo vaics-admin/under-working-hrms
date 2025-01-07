@@ -1,95 +1,112 @@
 .admin-top-nav-bar {
-    display: flex;
-    height: 50px;
-    width: 100%;
-    gap: 20px;
-    list-style: none;
-    align-items: center;
-    position: relative;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .admin-nav-bar-button-li {
-    position: relative;
-  }
-  
-  .nav-Active {
-    border: solid 0px;
-    border-bottom-width: 4px;
-    border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px;
-    border-bottom-color: rgb(50, 74, 253);
-  }
-  
-  .admin-top-nav-button {
-    font-size: 12px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: bolder;
-    border-width: 0px;
-    background-color: transparent;
-    height: 40px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .Active {
-    background-color: rgba(255, 255, 2, 0.196);
-    height: 30px;
-    margin-bottom: 5px;
-  }
-  
-  .sublist {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: rgb(238, 234, 148);
-    list-style: none;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    min-width: 200px;
-  }
-  
-  .sublist li {
-    margin: 5px 0;
-  }
-  
-  .sublist li button {
-    background: none;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: bolder;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-    color: #333;
-    text-align: left;
-    width: 100%;
-  }
-  
-  .sublist li button:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  .second-sub-list {
-    position: absolute;
-    top: 0;
-    left: 90%;
-    background-color: rgb(238, 235, 194);
-    list-style: none;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    min-width: 200px;
-  }
-  
-  .second-sub-list li {
-    margin: 5px 0;
-  }
-  
-  .second-sub-list li button:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  
+  display: flex;
+  height: 50px;
+  width: 100%;
+  gap: 20px;
+  list-style: none;
+  align-items: center;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-nav-bar-button-li {
+  position: relative;
+}
+
+.nav-Active {
+  border: solid 0px;
+  border-bottom-width: 4px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-bottom-color: rgb(50, 74, 253);
+}
+
+.admin-top-nav-button {
+  font-size: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bolder;
+  border-width: 0px;
+  background-color: transparent;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.Active {
+  background-color: rgba(255, 255, 2, 0.196);
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.sublist {
+  position: absolute;
+  top: calc(100% + 5px); /* Position dropdown slightly below the parent */
+  left: 0;
+  background-color: rgb(238, 234, 148);
+  list-style: none;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 200px;
+}
+
+.sublist li {
+  position: relative;
+  margin: 5px 0;
+}
+
+.sublist-button {
+  background: none;
+  font-family: cursive;
+  font-weight: bolder;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: #333;
+  text-align: left;
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.sublist li button:hover,
+.sublist-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.second-sub-list {
+  position: absolute;
+  top: 0;
+  left: 100%; /* Aligns the second sublist next to the parent */
+  background-color: rgb(238, 235, 194);
+  list-style: none;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 200px;
+}
+
+.second-sub-list li {
+  margin: 5px 0;
+}
+
+.second-sub-list li button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.second-sub-list-button{
+  background-color: transparent;
+  font-family: cursive;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  width: 170px;
+  margin: 0px;
+  font-size: 12px;
+  font-weight: bolder;
+  color: black;
+  text-align: start;
+}

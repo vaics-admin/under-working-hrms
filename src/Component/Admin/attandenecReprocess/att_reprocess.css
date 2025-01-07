@@ -1,0 +1,120 @@
+.att-reprocess {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f6f6ea73;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.317);
+    width: 95%;
+    height: 90vh;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .radio-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .radio {
+    display: flex;
+    align-items: center;
+  }
+  
+  .radio input[type="radio"] {
+    margin-right: 10px;
+  }
+  
+  label {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .search-container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 10;
+  }
+  
+  .suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .suggestion-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .selected-employees-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .selected-employee {
+    display: flex;
+    align-items: center;
+    background-color: #e0f7fa;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #00796b;
+    border: 1px solid #b2dfdb;
+  }
+  
+  .remove-button {
+    background: none;
+    border: none;
+    color: #00796b;
+    font-size: 14px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .remove-button:hover {
+    color: #004d40;
+  }
+  
+  .process-button {
+    width: 300px;
+    margin: auto;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .process-button:hover {
+    background-color: #0056b3;
+  }  

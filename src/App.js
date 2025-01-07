@@ -102,7 +102,7 @@ function App() {
 
           <Route path='/experiment/down' Component={DownloadLeaveHistory}/>
 
-          <Route path='/Admin-dashbord' Component={AdminDashbord}/>
+          
 
           <Route path='/experiment/mynavbar' Component={MyNavbar}/>
 
@@ -126,6 +126,8 @@ function App() {
           <Route path="/Quick-Links/Profile-Picture-Upload" element={<ProfilePicture />} />
 
 
+          {/* Admin dashbord */}
+          <Route path='/admin/:button/:name' Component={AdminDashbord}/>
 
         </Routes>
       </Router>

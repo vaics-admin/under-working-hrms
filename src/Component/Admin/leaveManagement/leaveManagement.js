@@ -58,7 +58,7 @@ const RequestManagement = () => {
 
   return (
     <div className="admin-request-management-main-container">
-      <Dashboard />
+    
       <div className="request-details">
         <h2 className="admin-request-head">Leave Requests</h2>
         <div className="leave-management-content">

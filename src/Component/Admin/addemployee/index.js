@@ -106,13 +106,7 @@ const AddUser = () => {
   });
 
   return (
-    <div className="add-main-container">
-      <div className="image-container">
-        <img src=".\adduser.png" alt="adduser" className="adduser-image" />
-        <div className="comp-logo">
-          <img className="comp" src=".\VAICSLogo.png" alt="logo" />
-        </div>
-      </div>
+    
       <div className="adduser-heading-container">
         <h1 className="heading-adduser">Add Employee Information</h1>
         <p className="note">Fill in the Details</p>
@@ -378,7 +372,7 @@ const AddUser = () => {
           )}
         </Formik>
       </div>
-    </div>
+    
   );
 };
 

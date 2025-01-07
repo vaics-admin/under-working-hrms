@@ -1,0 +1,11 @@
+.node {
+    fill: white;
+    stroke: #4c90e2;
+    stroke-width: 2px;
+  }
+  
+  .link {
+    stroke: #4c90e2;
+    stroke-width: 2px;
+  }
+  

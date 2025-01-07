@@ -1,6 +1,7 @@
 .main-home{
     display: flex;
     max-height: 100vh;
+    box-sizing: content-box;
 }
 
 .logo{
@@ -18,9 +19,9 @@
 }
 
 .home-tabs-container{
-    
     min-height: 100vh;
     width: 13vw;
+    /* position: fixed; */
 }
 
 .vaics-logo{
