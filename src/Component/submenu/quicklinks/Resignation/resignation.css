@@ -1,11 +1,5 @@
 /* Resetting default browser styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
+.resignation-form-main-container {
   font-family: Arial, sans-serif;
   background-color: #f4f4f9;
   display: flex;
@@ -19,7 +13,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 3rem; /* Increased padding */
-  width: 120%; /* Set to 100% for responsive design */
+  width: 50%; /* Set to 100% for responsive design */
   max-width: 1100px; /* Adjusted max-width */
   display: flex;
   flex-direction: column;
@@ -60,9 +54,9 @@ label {
   margin-bottom: 0.5rem;
 }
 
-input,
-select,
-textarea {
+.resignation-date-input,
+.reason-select,
+.textarea-remarks {
   font-size: 1.2rem; /* Increased font size */
   padding: 1rem; /* Increased padding */
   border: 1px solid #ccc;
@@ -70,22 +64,22 @@ textarea {
   outline: none;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+.resignation-date-input:focus,
+.reason-select:focus,
+.textarea-remarks:focus {
   border-color: #007bff;
 }
 
-textarea {
+.textarea-remarks-remarks {
   resize: vertical;
-  min-height: 130px; /* Increased min-height for textarea */
+  min-height: 130px; /* Increased min-height for .textarea-remarks */
 }
 
-select {
+.reason-select {
   cursor: pointer;
 }
 
-input[type="file"] {
+.resignation-date-input[type="file"] {
   padding: 0.75rem;
 }
 
@@ -110,23 +104,23 @@ button.submit-btn:hover {
   justify-content: flex-end;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+.form-group .resignation-date-input,
+.form-group .reason-select,
+.form-group .textarea-remarks {
   margin-top: 0.5rem;
 }
 
-.form-group input[type="date"] {
-  padding: 1rem; /* Adjusted padding for date inputs */
+.form-group .resignation-date-input[type="date"] {
+  padding: 1rem; /* Adjusted padding for date .resignation-date-inputs */
 }
 
-.form-group input[type="tel"],
-.form-group input[type="email"],
-.form-group input[type="text"] {
-  padding: 1rem; /* Adjusted padding for text inputs */
+.form-group .resignation-date-input[type="tel"],
+.form-group .resignation-date-input[type="email"],
+.form-group .resignation-date-input[type="text"] {
+  padding: 1rem; /* Adjusted padding for text .resignation-date-inputs */
 }
 
-.form-group input[type="date"]:disabled {
+.form-group .resignation-date-input[type="date"]:disabled {
   background-color: #e9ecef;
 }
 

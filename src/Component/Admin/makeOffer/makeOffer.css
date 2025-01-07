@@ -1,0 +1,146 @@
+/* Overall container */
+.makeoffer-container {
+    width: 100%;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+  
+  /* Header */
+  .makeoffer-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Form container */
+  .makeoffer-form-container {
+    margin-bottom: 20px;
+  }
+  
+  /* Input and Textarea fields */
+  .makeoffer-input-field,
+  .makeoffer-textarea-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .makeoffer-textarea-field {
+    resize: vertical;
+  }
+  
+  /* Label */
+  label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  /* Preview Section */
+  .makeoffer-preview-title {
+    font-size: 18px;
+    margin: 20px 0 10px;
+  }
+  
+  .makeoffer-preview-container {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  .makeoffer-preview-container h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .makeoffer-preview-container p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Buttons */
+  .makeoffer-action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .makeoffer-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .makeoffer-primary-btn {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .makeoffer-primary-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .makeoffer-secondary-btn {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .makeoffer-secondary-btn:hover {
+    background-color: #5a6268;
+  }
+  
+  /* Modal */
+  .makeoffer-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .makeoffer-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .makeoffer-modal-content h3 {
+    margin-bottom: 15px;
+  }
+  
+  .makeoffer-modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Scrollable content */
+  .makeoffer-container {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  /* Apply overflow for long content */
+  .makeoffer-preview-container {
+    max-height: 300px; /* Max height for preview */
+    overflow-y: scroll; /* Enable scrolling */
+  }
+  

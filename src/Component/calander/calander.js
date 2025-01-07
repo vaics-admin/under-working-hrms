@@ -1,86 +1,161 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import './calander.css'
+import React, { useEffect, useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import "./calander.css";
 
+const EmployeeAttendanceCalendar = () => {
+  const [calendarData, setCalendarData] = useState({});
+  const [hoveredDateDetails, setHoveredDateDetails] = useState(null);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
-const AttendanceCalendar = () => {
-  const [date, setDate] = useState(new Date());
+  const generateCalendarData = () => {
+    const calendarData = {};
+    const startDate = new Date("2024-01-01");
+    const endDate = new Date("2024-12-31");
 
-  // Sample attendance data
-  const attendanceData = [
-    { name: 'John Doe', date: '2024-11-01', loginTime: '09:00', logoutTime: '18:00' },
-    { name: 'John Doe', date: '2024-11-02', loginTime: '09:30', logoutTime: '17:00' },
-    { name: 'John Doe', date: '2024-11-06', loginTime: null, logoutTime: null }, // Absent
-    { name: 'John Doe', date: '2024-11-04', loginTime: '09:00', logoutTime: '17:30' },
-    { name: 'John Doe', date: '2024-11-05', loginTime: '09:15', logoutTime: null }, // Partially present
-  ];
+    const getRandomStatus = () => {
+      const statuses = ["A", "P"];
+      return statuses[Math.floor(Math.random() * statuses.length)];
+    };
 
-  const getAttendanceStatus = (loginTime, logoutTime) => {
-    if (!loginTime && !logoutTime) return { status: 'A', color: 'red' }; // Absent
-    if (logoutTime && loginTime) {
-      const login = new Date(`2023-11-01T${loginTime}:00Z`); // Sample date
-      const logout = new Date(`2023-11-01T${logoutTime}:00Z`); // Sample date
-      if (logout - login >= 9 * 60 * 60 * 1000) return { status: 'P', color: 'green' , }; // Present
+    const getRandomShift = () => {
+      const shifts = [
+        "FX - Flexi Shift",
+        "GS - General Shift",
+        "NS - Night Shift",
+      ];
+      return shifts[Math.floor(Math.random() * shifts.length)];
+    };
+
+    const getRandomTime = () => {
+      const hours = Math.floor(Math.random() * 12) + 1;
+      const minutes = Math.floor(Math.random() * 60);
+      const amPm = Math.random() < 0.5 ? "AM" : "PM";
+      return `${hours}:${minutes < 10 ? "0" + minutes : minutes} ${amPm}`;
+    };
+
+    const getDateString = (date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    };
+
+    let currentDate = startDate;
+    while (currentDate <= endDate) {
+      const dateString = getDateString(currentDate);
+      const dayOfWeek = currentDate.getDay();
+
+      if (dayOfWeek === 5 || dayOfWeek === 6) {
+        calendarData[dateString] = {
+          status: "WO",
+          inTime: "",
+          outTime: "",
+          shift: "",
+        };
+      } else {
+        const status = getRandomStatus();
+        calendarData[dateString] = {
+          status,
+          inTime: status === "P" ? getRandomTime() : "",
+          outTime: status === "P" ? getRandomTime() : "",
+          shift: status === "P" ? getRandomShift() : "",
+        };
+      }
+
+      currentDate.setDate(currentDate.getDate() + 1);
     }
-    return { status: 'P/A', color: 'orange' }; // Present/Absent
+
+    return calendarData;
   };
 
-  const handleDateChange = (newDate) => {
-    setDate(newDate);
+  const calendarDataSample = generateCalendarData();
+
+  useEffect(() => {
+    setCalendarData(calendarDataSample);
+  }, []);
+
+  const handleMouseEnter = (event, date) => {
+    const dateString = date.toISOString().split("T")[0];
+    const details = calendarData[dateString];
+    if (details) {
+      setHoveredDateDetails(details);
+      setTooltipPosition({ x: event.clientX, y: event.clientY });
+    }
   };
 
+  const handleMouseLeave = () => {
+    setHoveredDateDetails(null);
+  };
 
-  const tileClassName = ({ date }) => {
-    const dateKey = date.toISOString().split('T')[0]; // Format to YYYY-MM-DD
-    const attendanceForDate = attendanceData.find(entry => entry.date === dateKey);
-
-    if (attendanceForDate) {
-      const { status } = getAttendanceStatus(attendanceForDate.loginTime, attendanceForDate.logoutTime);
-      if (status === 'P') {
-        return 'present'; // Apply 'present' class if status is 'P'
-      }
-      if (status === 'A') {
-        return 'absent'; // Apply 'present' class if status is 'P'
-      }
-      if (status === 'P/A') {
-        return 'partial'; // Apply 'present' class if status is 'P'
+  const tileClassName = ({ date, view }) => {
+    if (view === "month") {
+      const dateString = date.toISOString().split("T")[0];
+      switch (calendarData[dateString]?.status) {
+        case "P":
+          return "tile-present";
+        case "A":
+          return "tile-absent";
+        case "WO":
+          return "tile-weekend";
+        default:
+          return null;
       }
     }
-    return ''; // No class if not present
+    return null;
   };
 
-  const tileContent = ({ date }) => {
-    const dateKey = date.toISOString().split('T')[0]; // Format to YYYY-MM-DD
-    const attendanceForDate = attendanceData.filter(entry => entry.date === dateKey);
-
-    if (!attendanceForDate.length) return null;
-
-    return (
-      <div>
-        {attendanceForDate.map((entry, index) => {
-          const { status, color , } = getAttendanceStatus(entry.loginTime, entry.logoutTime);
-          return (
-            <div key={index} >
-               {status}
-            </div>
-          );
-        })}
-      </div>
-    );
+  const tileContent = ({ date, view }) => {
+    if (view === "month") {
+      const dateString = date.toISOString().split("T")[0];
+      const details = calendarData[dateString];
+      if (details) {
+        return (
+          <div
+            className="tile-content"
+            onMouseEnter={(e) => handleMouseEnter(e, date)}
+            onMouseLeave={handleMouseLeave}
+          >
+            <span>{details.status}</span>
+          </div>
+        );
+      }
+    }
+    return null;
   };
 
   return (
-    <div>
-      
-      <Calendar 
-        onChange={handleDateChange} 
-        value={date} 
-        tileContent={tileContent} 
+    <div className="calendar-container">
+      <Calendar
         tileClassName={tileClassName}
+        tileContent={(tileProps) => (
+          <div
+            className="tile-wrapper"
+            onMouseEnter={(e) => handleMouseEnter(e, tileProps.date)}
+            onMouseLeave={handleMouseLeave}
+          >
+            {tileContent(tileProps)}
+          </div>
+        )}
       />
+      {hoveredDateDetails && (
+        <div
+          className="tooltip"
+          style={{
+            top: `${tooltipPosition.y + 10}px`,
+            left: `${tooltipPosition.x + 10}px`,
+          }}
+        >
+          {hoveredDateDetails.inTime && <p>In: {hoveredDateDetails.inTime}</p>}
+          {hoveredDateDetails.outTime && (
+            <p>Out: {hoveredDateDetails.outTime}</p>
+          )}
+          {hoveredDateDetails.shift && <p>Shift: {hoveredDateDetails.shift}</p>}
+          <p>Status: {hoveredDateDetails.status}</p>
+        </div>
+      )}
     </div>
   );
 };
 
-export default AttendanceCalendar;
+export default EmployeeAttendanceCalendar;

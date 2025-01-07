@@ -1,56 +1,86 @@
-/* Styles for the calendar component */
+/* Calendar Container */
+.calendar-container {
+   width: 500px;
+   margin-left: 0px;
+   
+}
+
+/* React Calendar Styles */
 .react-calendar {
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 10px;
-    width: 350px; /* Set width as needed */
-    background-color: #fff;
-  }
-  
-  /* Customize the tiles */
-  .react-calendar__tile {
-    padding: 10px;
+    margin-left: 0px;
+    line-height: 20px;
+    height: 380px;
+    margin-top: 10px;
+    
+}
+
+.react-calendar button {
+    font-size: 10px;
+    height: 47px;
+    padding: 3px;
+}
+
+/* Tile Background Colors */
+.tile-present {
+    background-color: #c8e6c9; /* Green */
+    color: #1b5e20;
     border-radius: 4px;
-  }
-  
-  /* Add hover effect for tiles */
-  .react-calendar__tile:hover {
-    background-color: #f0f0f0;
-  }
-  
-  /* Style for present status */
-  .present {
-    color: black;
-    background-color: rgb(154, 241, 154) !important;
-    
-  }
-  
-  /* Style for partially absent status */
-  .partial {
-    color: black;
-    background-color: rgb(235, 212, 169);
-    
-  }
-  
-  /* Style for absent status */
-  .absent {
-    color: black;
-    background-color: rgb(221, 117, 117);
-    
-  }
-  
-  /* Add specific styles for the header */
-  .react-calendar__month-view__weekdays {
-    background-color: #f8f8f8;
-    font-weight: bold;
-  }
-  
-  /* Style for the selected day */
-  .react-calendar__tile--active {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  /*.react-calendar button{
-    
-  } */
+}
+
+.tile-absent {
+    background-color: #ffcdd2; /* Red */
+    color: #b71c1c;
+    border-radius: 4px;
+}
+
+.tile-weekend {
+    background-color: #fff9c4; /* Yellow */
+    color: #f57f17;
+    border-radius: 4px;
+}
+
+/* Tooltip */
+.tooltip {
+    position: fixed;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    white-space: nowrap;
+    pointer-events: none;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.tooltip p {
+    margin: 0;
+}
+
+
+
+
+
+
+
+/* Ensuring a black border for all calendar days */
+.react-calendar__month-view__days__day {
+    border: 1px solid black !important; /* Black border for each day */
+    width: 100%; /* Ensure full width for each day */
+    height: 50px; /* Fixed height for each day */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; /* Ensure the border is included in the box model */
+}
+
+/* Ensure that neighboring days in the previous/next month don't conflict */
+.react-calendar__month-view__days__day--neighboringMonth {
+    border: 1px solid black !important; /* Apply black border to neighboring days */
+}
+
+
