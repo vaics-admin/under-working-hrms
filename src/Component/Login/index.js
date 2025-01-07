@@ -26,7 +26,7 @@ const Login = () =>{
         event.preventDefault()
         
 
-        const response = await fetch('http://192.168.20.6:5000/login',{
+        const response = await fetch('http://127.0.0.1:5000/login',{
             method : 'POST',
             headers : {
                 'content-type' : 'application/json',
