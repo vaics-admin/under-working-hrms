@@ -3,18 +3,11 @@ body {
   font-family: Arial, sans-serif;
   background: linear-gradient(to right, #f8f9fa, #e9ecef);
 }
-.details-container {
-  padding: 20px;
-  max-width: 800px;
-  margin: 20px auto;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
 
- .other-details-container {
-  padding: 20px;
-  max-width: 800px;
+.details-container, .other-details-container {
+  padding: 30px; /* Increased padding for better spacing */
+  width: 95%; /* Set width to 95% for better use of screen space */
+  max-width: 1400px; /* Maximum width of 1400px to keep content from stretching too much on large screens */
   margin: 20px auto;
   background: white;
   border-radius: 8px;
@@ -22,36 +15,65 @@ body {
 }
 
 .detail-item {
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* Increased bottom margin to space out items more */
+  width: 100%; /* Make sure each item takes up the full width */
 }
 
 .detail-header {
   cursor: pointer;
   background: #007bff;
   color: white;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 15px; /* Increased padding for better prominence */
+  border-radius: 8px; /* Slightly larger border radius for a smoother look */
   display: flex;
   align-items: center;
+  font-size: 20px; /* Larger font size for better readability */
+  box-sizing: border-box;
 }
 
 .detail-content {
-  padding: 15px;
+  padding: 25px; /* Increased padding to make content area larger */
   border: 1px solid #007bff;
-  border-radius: 5px;
-  margin-top: 10px;
+  border-radius: 8px; /* Increased border radius for rounded corners */
+  margin-top: 15px; /* Increased margin for better separation */
+  background-color: #f8f9fa; /* Light background color for content */
 }
 
 .submit-button {
   background: #28a745;
   color: white;
-  padding: 10px 15px;
+  padding: 15px 25px; /* Larger padding for visual balance */
   border: none;
-  border-radius: 5px;
+  border-radius: 8px; /* Larger border radius for a smoother button */
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px; /* Larger font size for readability */
+  width: 100%; /* Button takes up the full width of the container */
+  margin-top: 25px; /* Added margin on top for spacing */
 }
 
 .submit-button:hover {
   background: #218838;
+}
+
+/* For smaller screens, adjust layout */
+@media (max-width: 768px) {
+  .details-container {
+    width: 100%;
+    padding: 20px; /* Adjust padding on smaller screens */
+  }
+
+  .detail-header {
+    font-size: 18px; /* Adjust font size for smaller screens */
+    padding: 12px; /* Adjust padding */
+  }
+
+  .detail-content {
+    padding: 20px; /* Adjust padding */
+  }
+
+  .submit-button {
+    font-size: 18px; /* Adjust button font size */
+    padding: 12px 20px; /* Adjust padding */
+    width: auto; /* Make button width auto on small screens */
+  }
 }

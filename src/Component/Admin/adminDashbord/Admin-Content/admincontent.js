@@ -15,6 +15,7 @@ import UploadeLeave from '../../uploadeleave/uploadeleave'
 import CreateTicket from '../../createTicket/createticket'
 import SupportDesk from '../../suppoer Desk/supportdest'
 import OrgChart from '../../orgtree/orgtree'
+import Employee_Search from '../searchemployee/Employee-Search'
 
 
 const AdminContent = () =>{
@@ -37,6 +38,7 @@ const AdminContent = () =>{
             {name === "create-ticket-for-employee" && <CreateTicket/>}
             {name === "support-desk" && <SupportDesk/>}
             {name === "organization-chart" && <OrgChart/>}
+            {name === "search" && <Employee_Search/>}
         </div>
     )
 }

@@ -54,7 +54,7 @@ const Login = () =>{
                 <img className="company-name" src="/vaics.jpg" alt = "comp-logo"/>
                 <p className = "welcome-note">WELCOME TO VAICS</p>
             </div>
-            <div className = "form-container">
+            <div className = "login-form-container">
                 <form onSubmit={submitForm} className = "login-form">
                     <label className = "label" for = "username">User Name</label>
                     <input onChange={changeUserName} id = "username" className= "cred-input" type = "text"/>

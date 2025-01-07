@@ -1,0 +1,71 @@
+/* src/EmployeeSearch.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding: 10px 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    background: #ffffff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+form input, 
+form textarea, 
+form select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #dddddd;
+}
+
+form button {
+    background: #35424a;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #475659;
+}
+
+.suggestions {
+    border: 1px solid #dddddd;
+    background: white;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute; /* Position suggestions below input */
+    width: calc(100% - 20px); /* adjust width */
+}
+
+.suggestions div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestions div:hover {
+    background-color: #f0f0f0; /* Highlight suggestion on hover */
+}

@@ -1,9 +1,8 @@
 .main-home{
     display: flex;
     max-height: 100vh;
-    box-sizing: content-box;
 }
-
+ 
 .logo{
     margin-top: 20px;
     text-align: center;
@@ -17,18 +16,22 @@
     scrollbar-width: none;
     height: 70vh;
 }
-
-.home-tabs-container{
+ 
+.home-tabs-container {
+    position: fixed;
+    top: 0;
+    left: 0;
     min-height: 100vh;
-    width: 13vw;
-    /* position: fixed; */
+    width: 13vw; /* Width of the sidebar */
+    background-color: #2C3E50;
+    z-index: 100;
 }
-
+ 
 .vaics-logo{
     width: 100px;
     margin: 10px;
 }
-
+ 
 .hrms-head{
     display: flex;
     justify-content: center;
@@ -49,9 +52,9 @@
 .menu-head{
     font-size: 15px;
 }
-
+ 
 /* Styling for Tabs */
-
+ 
 .tab-button{
     display: flex;
     justify-content: space-around;
@@ -61,50 +64,49 @@
     height: 50px;
     margin-top: 3px;
     font-size: 12px;
-    
+   
 }
 .icon{
     width: 1vw;
-    
+   
 }
 .tab-name{
     width: 5vw;
    margin-top: auto;
 }
-
+ 
 .d-icon{
     width: 1vw;
-    
+   
 }
-
-
-
-
-
-
-
-
-
+ 
 .headerAndContent-container{
     min-height: 100vh;
     width: 85vw;
     margin: 10px;
     border-radius: 10px;
 }
-.header{
+.header {
     height: 10vh;
-    width: 83vw;
+    width: calc(90vw - 13vw); /* Adjusts width to fit the remaining space */
     margin: 10px;
+    margin-left: calc(13vw + 30px); /* Moves the header slightly to the right */
     margin-top: 20px;
     border-radius: 20px;
+    box-sizing: border-box; /* Ensures padding and borders are included in width */
+    background-color: #999595; /* Retain the background color */
+    z-index: 101; /* Ensure it appears above other elements if necessary */
 }
 
-.content{
+
+.content {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 85vw;
+    width: calc(100vw - 13vw); /* Adjusts width to fit the remaining space */
     height: 90vh;
+    margin-left: 13vw; /* Pushes content to the right of the sidebar */
+    box-sizing: border-box; /* Ensures padding and borders are included in the width */
 }
 .first-half{
     width: 85vw;
@@ -116,28 +118,28 @@
     width: 85vw;
     display: flex;
     justify-content: space-between;
-    
+   
 }
-
-
+ 
+ 
 .card{
     width: 300px;
     margin: 30px;
     background-color: rgb(233, 242, 249);
 }
-
+ 
 .calander{
     margin-left: 30px;
 }
-
+ 
 .request-container{
     width: 30vw;
     height: 30vh;
 }
-
-
+ 
+ 
 /* Sub Menu*/
-
+ 
 .submenu{
     list-style: none;
     margin-bottom: 10px;
@@ -152,38 +154,38 @@
     border-style: none;
     font-size: 12px;
 }
-
-
-
+ 
+ 
+ 
 /* colors */
-
+ 
 .home-tabs-container{
     background-color:#2C3E50;
     height: 100vh;
-    
+   
 }
-
+ 
 .header{
     background-color: #999595;
 }
-
+ 
 .submenu{
     background-color: #e9b972;
 }
-
+ 
 .headerAndContent-container{
     background-color: #ffffff;
     margin: 0px;
     width: 100%;
 }
-
+ 
 .tab-button{
     color :rgb(2, 0, 0);
     background-color: #FF9800;
     border-radius: 10px;
     margin: 6px;
 }
-
+ 
 .logo{
     background-color: aliceblue;
     min-height: 50px;
@@ -195,10 +197,11 @@
 .main-home{
     background-color: rgb(255, 255, 255);
 }
-
+ 
 .request-container{
     height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+ 

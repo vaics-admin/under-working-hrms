@@ -7,7 +7,7 @@
   align-items: center;
   min-height: 100vh;
 }
-
+ 
 .form-container {
   background-color: #ffffff;
   border-radius: 8px;
@@ -19,41 +19,45 @@
   flex-direction: column;
   justify-content: center;
 }
-
+ 
 .form-title {
   text-align: center;
   font-size: 2.5rem; /* Adjusted title size */
   color: #333;
   margin-bottom: 2rem;
 }
-
+ 
 .resignation-form {
   display: flex;
   flex-direction: column;
 }
-
+ 
 .form-section {
   margin-bottom: 2rem;
 }
-
+ 
 .form-section h2 {
   font-size: 1.7rem; /* Increased font size */
   color: #333;
   margin-bottom: 1rem;
 }
-
+ 
 .form-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 1.5rem;
 }
-
+ 
 label {
   font-size: 1.2rem; /* Increased label font size */
   color: #555;
   margin-bottom: 0.5rem;
 }
+<<<<<<< HEAD:src/Component/submenu/quicklinks/Resignation/resignation.css
 
+=======
+ 
+>>>>>>> 6e0976c46888e0fb594c0917799b6d66af207a05:src/Component/submenu/quicklinks/Resignation/index.css
 .resignation-date-input,
 .reason-select,
 .textarea-remarks {
@@ -63,26 +67,42 @@ label {
   border-radius: 4px;
   outline: none;
 }
+<<<<<<< HEAD:src/Component/submenu/quicklinks/Resignation/resignation.css
 
+=======
+ 
+>>>>>>> 6e0976c46888e0fb594c0917799b6d66af207a05:src/Component/submenu/quicklinks/Resignation/index.css
 .resignation-date-input:focus,
 .reason-select:focus,
 .textarea-remarks:focus {
   border-color: #007bff;
 }
+<<<<<<< HEAD:src/Component/submenu/quicklinks/Resignation/resignation.css
 
+=======
+ 
+>>>>>>> 6e0976c46888e0fb594c0917799b6d66af207a05:src/Component/submenu/quicklinks/Resignation/index.css
 .textarea-remarks-remarks {
   resize: vertical;
   min-height: 130px; /* Increased min-height for .textarea-remarks */
 }
+<<<<<<< HEAD:src/Component/submenu/quicklinks/Resignation/resignation.css
 
 .reason-select {
   cursor: pointer;
 }
 
+=======
+ 
+.reason-select {
+  cursor: pointer;
+}
+ 
+>>>>>>> 6e0976c46888e0fb594c0917799b6d66af207a05:src/Component/submenu/quicklinks/Resignation/index.css
 .resignation-date-input[type="file"] {
   padding: 0.75rem;
 }
-
+ 
 button.submit-btn {
   background-color: #007bff;
   color: white;
@@ -94,61 +114,78 @@ button.submit-btn {
   transition: background-color 0.3s;
   width: 100%;
 }
-
+ 
 button.submit-btn:hover {
   background-color: #0056b3;
 }
-
+ 
 .form-actions {
   display: flex;
   justify-content: flex-end;
 }
+<<<<<<< HEAD:src/Component/submenu/quicklinks/Resignation/resignation.css
 
+=======
+ 
+>>>>>>> 6e0976c46888e0fb594c0917799b6d66af207a05:src/Component/submenu/quicklinks/Resignation/index.css
 .form-group .resignation-date-input,
 .form-group .reason-select,
 .form-group .textarea-remarks {
   margin-top: 0.5rem;
 }
+<<<<<<< HEAD:src/Component/submenu/quicklinks/Resignation/resignation.css
 
 .form-group .resignation-date-input[type="date"] {
   padding: 1rem; /* Adjusted padding for date .resignation-date-inputs */
 }
 
+=======
+ 
+.form-group .resignation-date-input[type="date"] {
+  padding: 1rem; /* Adjusted padding for date .resignation-date-inputs */
+}
+ 
+>>>>>>> 6e0976c46888e0fb594c0917799b6d66af207a05:src/Component/submenu/quicklinks/Resignation/index.css
 .form-group .resignation-date-input[type="tel"],
 .form-group .resignation-date-input[type="email"],
 .form-group .resignation-date-input[type="text"] {
   padding: 1rem; /* Adjusted padding for text .resignation-date-inputs */
 }
+<<<<<<< HEAD:src/Component/submenu/quicklinks/Resignation/resignation.css
 
+=======
+ 
+>>>>>>> 6e0976c46888e0fb594c0917799b6d66af207a05:src/Component/submenu/quicklinks/Resignation/index.css
 .form-group .resignation-date-input[type="date"]:disabled {
   background-color: #e9ecef;
 }
-
+ 
 h2 {
   margin-bottom: 0.5rem;
 }
-
+ 
 /* Adding responsive design */
 @media (max-width: 768px) {
   .form-container {
     width: 90%; /* Adjusted width for smaller screens */
     padding: 2rem; /* Adjusted padding for smaller screens */
   }
-
+ 
   .form-title {
     font-size: 2rem;
     margin-bottom: 1.5rem;
   }
-
+ 
   .form-section h2 {
     font-size: 1.3rem;
   }
-
+ 
   .form-group {
     margin-bottom: 1.5rem;
   }
-
+ 
   button.submit-btn {
     font-size: 1.2rem;
   }
 }
+ 
