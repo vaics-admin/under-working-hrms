@@ -12,7 +12,7 @@ export const Leaveforms = () => {
     reason: "",
     reasonText: "",
     // document: null,
-    employee_id: localStorage.getItem("employee_id"),
+    employee_id: localStorage.getItem("empcode"),
   });
 
   // State to store message
@@ -45,7 +45,7 @@ export const Leaveforms = () => {
     
     // Perform actions like form submission or API calls here
     try {
-      const response = await fetch("http://192.168.20.6:5000/applyLeave", {
+      const response = await fetch("http://127.0.0.1:5000/leave_management/addleaverequest", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export const Leaveforms = () => {
           reason: "",
           reasonText: "",
           // document: null,
-          employee_id: localStorage.getItem("employee_id"),
+          //employee_id: localStorage.getItem("employee_id"),
         });
         setMsg("Applied Successfully!");
       } else {
@@ -111,11 +111,11 @@ export const Leaveforms = () => {
               onChange={handleChange}
             >
               <option value="">Select</option>
-              <option value="Restricted Holiday">Restricted Holiday</option>
-              <option value="Loss of Pay">Loss of Pay</option>
-              {/* <option value="vacation">Vacation Leave</option> */}
+              <option value="sick">Sick Leave</option>
+              <option value="casual">Casual Leave</option>
+              <option value="vacation">Vacation Leave</option>
               <option value="Earned Leave">Earned Leave</option>
-              {/* <option value="other">Other</option> */}
+              <option value="other">Other</option>
             </select>
           </div>
           <div className="form-group">
@@ -209,9 +209,12 @@ export const Restrictedholidayform = () => {
     reason: "",
     reasonText: "",
     // document: null,
-    employee_id: localStorage.setItem("employee_id"),
-  });
+    //employee_id: localStorage.setItem("employee_id"),
+    // Set employee_id in state
+   emp_id: localStorage.getItem("emp_id"),
 
+  });
+  const [msg, setMsg] = useState(""); // This initializes the 'msg' state and defines 'setMsg'
   const futureHolidays = getFutureHolidays();
 
   const handleChange = (event) => {
@@ -232,17 +235,37 @@ export const Restrictedholidayform = () => {
         console.log( leaveDetails)
     
     try {
-      const response = await fetch("http://localhost:5000/applyLeave", {
+      const response = await fetch("http://127.0.0.1:5000/leave_management/applyLeave", {
         method : 'POST',
         headers : {
           'Content-Type' : 'application/json'
         },
         body : JSON.stringify(leaveDetails )
-      })
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        // If the request was successful
+        setMsg("Restricted holiday leave applied successfully!");
+        // Reset form data
+        setFormData({
+          fromDate: "",
+          toDate: "",
+          leaveType: "Restricted Holiday",
+          reason: "",
+          reasonText: "",
+          emp_id: localStorage.getItem("emp_id"),
+        });
+      } else {
+        // If there was an error with the backend
+        setMsg(data.error || "An error occurred while applying for the leave.");
+      }
     } catch (error) {
+      setMsg("An error occurred. Please try again.");
       console.error(error);
     }
-  }
+  };
+
 
   return (
     <div className="res-container">
@@ -301,3 +324,184 @@ export const Restrictedholidayform = () => {
     </div>
   );
 };
+
+
+
+/////////////////////////////////////////////////////////////////////
+
+
+// import "./leaveforms.css";
+// import { useState } from "react";
+
+// export const Leaveforms = () => {
+//   // State to store leave request details - aligned with database schema
+//   const [leaveDetails, setleaveDetails] = useState({
+//     from_date: "",
+//     to_date: "",
+//     leave_type: "",
+//     reason: "",
+//     emp_id: localStorage.getItem("emp_id"),
+//     no_of_day: 0
+//   });
+
+//   // State to store message
+//   const [msg, setMsg] = useState("");
+
+//   // Calculate number of days between dates
+//   const calculateDays = (fromDate, toDate) => {
+//     if (!fromDate || !toDate) return 0;
+//     const start = new Date(fromDate);
+//     const end = new Date(toDate);
+//     const diffTime = Math.abs(end - start);
+//     return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // +1 to include both start and end dates
+//   };
+
+//   // Handler for input changes
+//   const handleChange = (event) => {
+//     const { name, value } = event.target;
+//     setleaveDetails(prev => {
+//       const newDetails = {
+//         ...prev,
+//         [name]: value
+//       };
+
+//       // Update no_of_day when dates change
+//       if (name === "from_date" || name === "to_date") {
+//         newDetails.no_of_day = calculateDays(
+//           name === "from_date" ? value : prev.from_date,
+//           name === "to_date" ? value : prev.to_date
+//         );
+//       }
+
+//       return newDetails;
+//     });
+//   };
+
+//   // Form submission handler
+//   const submitLeaveRequest = async (event) => {
+//     event.preventDefault();
+
+//     try {
+//       const response = await fetch("http://127.0.0.1:5000/addleaverequest", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           ...leaveDetails,
+//           applied_on: new Date().toISOString().split('T')[0],
+//           status: 'Pending'
+//         }),
+//       });
+
+//       if (response.ok) {
+//         setleaveDetails({
+//           from_date: "",
+//           to_date: "",
+//           leave_type: "",
+//           reason: "",
+//           emp_id: localStorage.getItem("emp_id"),
+//           no_of_day: 0
+//         });
+//         setMsg("Applied Successfully!");
+//       } else {
+//         const errorData = await response.json();
+//         setMsg(errorData.message || "Error submitting the leave request.");
+//       }
+//     } catch (error) {
+//       setMsg("An error occurred. Please try again.");
+//       console.error(error);
+//     }
+//   };
+
+//   return (
+//     <div className="leave-form-container">
+//       <form onSubmit={submitLeaveRequest} className="leave-form">
+//         {/* Row 1: From and To date inputs */}
+//         <div className="form-row">
+//           <div className="form-group">
+//             <label htmlFor="from-date">From</label>
+//             <input
+//               type="date"
+//               id="from-date"
+//               name="from_date"
+//               value={leaveDetails.from_date}
+//               onChange={handleChange}
+//               required
+//             />
+//           </div>
+//           <div className="form-group">
+//             <label htmlFor="to-date">To</label>
+//             <input
+//               type="date"
+//               id="to-date"
+//               name="to_date"
+//               value={leaveDetails.to_date}
+//               onChange={handleChange}
+//               required
+//             />
+//           </div>
+//         </div>
+
+//         {/* Row 2: Leave Type */}
+//         <div className="form-row">
+//           <div className="form-group">
+//             <label htmlFor="leave-type">Select Leave Type</label>
+//             <select
+//               id="leave-type"
+//               name="leave_type"
+//               value={leaveDetails.leave_type}
+//               onChange={handleChange}
+//               required
+//             >
+//               <option value="">Select</option>
+//               <option value="Earned Leave">Earned Leave</option>
+//               <option value="Loss of Pay">Loss of Pay</option>
+//             </select>
+//           </div>
+//           <div className="form-group">
+//             <label>Number of Days</label>
+//             <input
+//               type="text"
+//               value={leaveDetails.no_of_day}
+//               readOnly
+//               className="days-display"
+//             />
+//           </div>
+//         </div>
+
+//         {/* Row 3: Reason for Leave */}
+//         <div className="form-row">
+//           <div className="form-group text-area-group">
+//             <label htmlFor="reason">Reason for Leave</label>
+//             <textarea
+//               id="reason"
+//               name="reason"
+//               rows="4"
+//               placeholder="Enter the reason for leave"
+//               value={leaveDetails.reason}
+//               onChange={handleChange}
+//               required
+//             ></textarea>
+//           </div>
+//         </div>
+
+//         {/* Message display */}
+//         <div className="form-row">
+//           <p style={{ color: msg === "Applied Successfully!" ? "green" : "red" }}>
+//             {msg}
+//           </p>
+//         </div>
+
+//         {/* Submit Button */}
+//         <div className="form-row">
+//           <button type="submit" className="submit-button">
+//             Submit
+//           </button>
+//         </div>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default Leaveforms;

@@ -45,7 +45,7 @@ const tabDetails = [
         tabIcon : <FaMoneyCheckDollar/>,
         droupDown : true,
     },
-    {tabName : 'PMS Employee',
+    {tabName : 'PMS-Employee',
         key : 5,
         isActive : false,
         subMenu : ["My-Goals" , "My-Appraisal"],

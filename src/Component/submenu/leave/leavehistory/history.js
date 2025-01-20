@@ -16,10 +16,14 @@ const History = () => {
 
   useEffect(() => {
     const fetchLeaveTransaction = async () => {
-      const id = localStorage.getItem("employee_id")
+      const id = localStorage.getItem("empcode");
+      if (!id) {
+        setError("Employee ID is missing.");
+        return;
+      }
       try {
         const response = await fetch(
-          "http://192.168.20.6:5000/employee/getleave",
+          "http://127.0.0.1:5000/leave_management/employee/getleave",
           {
             method: "POST",
             headers: {
@@ -30,7 +34,8 @@ const History = () => {
         );
 
         if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
+          const errorText = await response.text();
+          throw new Error(`Error: ${response.status} - ${errorText}`);
         }
 
         const result = await response.json();
@@ -65,28 +70,28 @@ const History = () => {
             {leaveHistory.length > 0 ? (
               leaveHistory.map((leave, index) => (
                 <TableRow
-                  key={leave.leave_id}
+                  key={leave.request_id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" align="center" scope="row">
-                    {leave.leave_id}
+                    {leave.request_id}
                   </TableCell>
                   <TableCell align="center">
                     {leave.leave_type || "N/A"}
                   </TableCell>
                   <TableCell align="center">
-                    {leave.applied_from
-                      ? leave.applied_from.split("T")[0]
+                    {leave.from_date
+                      ? leave.from_date.split("T")[0]
                       : "N/A"}
                   </TableCell>
                   <TableCell align="center">
-                    {leave.applied_to ? leave.applied_to.split("T")[0] : "N/A"}
+                    {leave.to_date ? leave.to_date.split("T")[0] : "N/A"}
                   </TableCell>
-                  <TableCell align="center">{leave.is_approved}</TableCell>
+                  <TableCell align="center">{leave.status}</TableCell>
                 </TableRow>
               ))
             ) : (
-              <p>No leave history found.</p>
+              ""
             )}
           </TableBody>
         </Table>
