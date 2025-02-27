@@ -76,11 +76,25 @@ const EmployeeAttendanceCalendar = () => {
   }, []);
 
   const handleMouseEnter = (event, date) => {
+    const { clientX, clientY } = event;
+    const tooltipWidth = 150; // Approximate tooltip width
+    const tooltipHeight = 80; // Approximate tooltip height
+
+    const x =
+      clientX + tooltipWidth > window.innerWidth
+        ? clientX - tooltipWidth - 10
+        : clientX + 10;
+
+    const y =
+      clientY + tooltipHeight > window.innerHeight
+        ? clientY - tooltipHeight - 10
+        : clientY + 10;
+
     const dateString = date.toISOString().split("T")[0];
     const details = calendarData[dateString];
     if (details) {
       setHoveredDateDetails(details);
-      setTooltipPosition({ x: event.clientX, y: event.clientY });
+      setTooltipPosition({ x, y });
     }
   };
 
@@ -111,11 +125,7 @@ const EmployeeAttendanceCalendar = () => {
       const details = calendarData[dateString];
       if (details) {
         return (
-          <div
-            className="tile-content"
-            onMouseEnter={(e) => handleMouseEnter(e, date)}
-            onMouseLeave={handleMouseLeave}
-          >
+          <div className="tile-content">
             <span>{details.status}</span>
           </div>
         );
@@ -128,13 +138,13 @@ const EmployeeAttendanceCalendar = () => {
     <div className="calendar-container">
       <Calendar
         tileClassName={tileClassName}
-        tileContent={(tileProps) => (
+        tileContent={({ date, view }) => (
           <div
             className="tile-wrapper"
-            onMouseEnter={(e) => handleMouseEnter(e, tileProps.date)}
+            onMouseEnter={(e) => handleMouseEnter(e, date)}
             onMouseLeave={handleMouseLeave}
           >
-            {tileContent(tileProps)}
+            {tileContent({ date, view })}
           </div>
         )}
       />
@@ -142,15 +152,17 @@ const EmployeeAttendanceCalendar = () => {
         <div
           className="tooltip"
           style={{
-            top: `${tooltipPosition.y + 10}px`,
-            left: `${tooltipPosition.x + 10}px`,
+            top: `${tooltipPosition.y}px`,
+            left: `${tooltipPosition.x}px`,
           }}
         >
           {hoveredDateDetails.inTime && <p>In: {hoveredDateDetails.inTime}</p>}
           {hoveredDateDetails.outTime && (
             <p>Out: {hoveredDateDetails.outTime}</p>
           )}
-          {hoveredDateDetails.shift && <p>Shift: {hoveredDateDetails.shift}</p>}
+          {hoveredDateDetails.shift && (
+            <p>Shift: {hoveredDateDetails.shift}</p>
+          )}
           <p>Status: {hoveredDateDetails.status}</p>
         </div>
       )}

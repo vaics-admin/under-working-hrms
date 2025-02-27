@@ -1,74 +1,94 @@
 /* Calendar Container */
 .calendar-container {
-   width: 500px;
-   margin-left: 0px;
-   
-}
-
-/* React Calendar Styles */
-.react-calendar {
-    width: 100%;
+    width: 500px;
+    margin-left: -25%;
+  }
+  
+  /* React Calendar Styles */
+  .react-calendar {
+    width: 80%;
     border: 1px solid #ccc;
     border-radius: 8px;
     margin-left: 0px;
     line-height: 20px;
-    height: 380px;
+    height: auto;
     margin-top: 10px;
     
-}
-
-.react-calendar button {
+  }
+  
+  .react-calendar button {
     font-size: 10px;
     height: 47px;
     padding: 3px;
-}
-
-/* Tile Background Colors */
-.tile-present {
-    background-color: #c8e6c9; /* Green */
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .react-calendar button:hover {
+    background-color: #f0f8ff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Tile Background Colors */
+  .tile-present {
+    background-color: #78e794 !important; /* Green */
     color: #1b5e20;
     border-radius: 4px;
-}
-
-.tile-absent {
-    background-color: #ffcdd2; /* Red */
+    border: 1px solid #b2dfdb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tile-absent {
+    background-color: #ffcdd2 !important; /* Red */
     color: #b71c1c;
     border-radius: 4px;
-}
-
-.tile-weekend {
-    background-color: #fff9c4; /* Yellow */
+    border: 1px solid #ef9a9a;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tile-weekend {
+    background-color: #fff9c4 !important; /* Yellow */
     color: #f57f17;
     border-radius: 4px;
-}
-
-/* Tooltip */
-.tooltip {
+    border: 1px solid #ffe082;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Tooltip */
+  .tooltip {
     position: fixed;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 10;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 100;
     white-space: nowrap;
     pointer-events: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #333;
-}
-
-.tooltip p {
+    transition: opacity 0.2s ease-in-out;
+    opacity: 1;
+  }
+  
+  .tooltip p {
     margin: 0;
-}
-
-
-
-
-
-
-
-/* Ensuring a black border for all calendar days */
-.react-calendar__month-view__days__day {
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+  
+  /* Tile Wrapper */
+  .tile-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  /* Ensuring a black border for all calendar days */
+  .react-calendar__month-view__days__day {
     border: 1px solid black !important; /* Black border for each day */
     width: 100%; /* Ensure full width for each day */
     height: 50px; /* Fixed height for each day */
@@ -76,11 +96,27 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box; /* Ensure the border is included in the box model */
-}
-
-/* Ensure that neighboring days in the previous/next month don't conflict */
-.react-calendar__month-view__days__day--neighboringMonth {
+  }
+  
+  /* Neighboring days in the previous/next month */
+  .react-calendar__month-view__days__day--neighboringMonth {
     border: 1px solid black !important; /* Apply black border to neighboring days */
-}
-
-
+    background-color: #f5f5f5;
+    color: #a9a9a9;
+  }
+  
+  /* Today highlight */
+  .react-calendar__tile--now {
+    background-color: #e3f2fd; /* Light blue for today */
+    color: #0d47a1;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  
+  /* Tile hover effect */
+  .react-calendar__tile:enabled:hover {
+    background-color: #e1f5fe; /* Slight blue hover effect */
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
