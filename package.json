@@ -76,9 +76,11 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "customize-cra": "^1.0.0",
     "eslint": "^8.57.1",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.1.0",
-    "font": "^0.0.4"
+    "font": "^0.0.4",
+    "react-app-rewired": "^2.2.1"
   }
 }
