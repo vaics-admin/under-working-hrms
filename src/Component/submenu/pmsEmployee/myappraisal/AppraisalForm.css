@@ -1,4 +1,35 @@
-.appraisal-form-container {
+/* .appraisal-form-container {
+    width: 500px;
+    margin: auto;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .submit-btn, .reset-btn {
+    padding: 10px 15px;
+  }
+   */
+
+
+   .appraisal-form-container {
     width: 500px;
     margin: auto;
   }

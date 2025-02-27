@@ -90,8 +90,8 @@ function App() {
           <Route path='/IT-Declaration' Component={ITdeclaration}/>
 
           {/* PMS Employee Routes*/}
-          <Route path='/My-Goals' Component={Mygoals}/>
-          <Route path='/My-Appraisal' Component={Appraisal}/>
+          <Route path='/PMS-Employee/My-Goals' Component={Mygoals}/>
+          <Route path='/PMS-Employee/My-Appraisal' Component={Appraisal}/>
 
           <Route path='/admin/get-requests' Component={RequestManagement}/>
 

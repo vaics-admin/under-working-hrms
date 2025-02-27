@@ -1,303 +1,280 @@
-import { color } from "@mui/system";
-import "./leaveforms.css";
-import { useState } from "react";
 
+// src/components/leaveManagement/applicationForms/leaveforms.js
+import React, { useState, useEffect } from "react";
+import "./leaveforms.css";
+import { color } from "@mui/system";
 
 export const Leaveforms = () => {
   // State to store leave request details
-  const [leaveDetails, setleaveDetails] = useState({
+  const [leaveDetails, setLeaveDetails] = useState({
     fromDate: "",
     toDate: "",
     leaveType: "",
     reason: "",
     reasonText: "",
-    // document: null,
-    employee_id: localStorage.getItem("employee_id"),
+    employee_id: localStorage.getItem("empcode"),
+    familyMember: ""
   });
 
-  // State to store message
-  const [msg, setMsg] = useState("");
+  const [validationErrors, setValidationErrors] = useState([]);
+  const [showLOPWarning, setShowLOPWarning] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [isOtherReason, setIsOtherReason] = useState(false);
+
+  const leaveTypes = [
+    { value: "Earned Leave", label: "Earned Leave" },
+    { value: "LOP", label: "Loss of Pay (LOP)" },
+    { value: "Maternity Leave", label: "Maternity Leave" },
+    { value: "Paternity Leave", label: "Paternity Leave" },
+    { value: "Bereavement Leave", label: "Bereavement Leave" },
+    { value: "Others", label: "Others" },
+  ];
+
+  const familyMembers = [
+    { value: "parent", label: "Parent" },
+    { value: "spouse", label: "Spouse" },
+    { value: "child", label: "Child" },
+    { value: "sibling", label: "Sibling" },
+  ];
 
   // Handler for input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    // Update state for file input
-    if (event.target.type === "file") {
-      // setleaveDetails({
-      //   ...leaveDetails,
-      //   [name]: event.target.files[0], // store file object
-      // });
-    } else {
-      // Update state for other inputs
-      setleaveDetails({
-        ...leaveDetails,
-        [name]: value,
-      });
+    // Update state
+    setLeaveDetails({
+      ...leaveDetails,
+      [name]: value,
+    });
+
+    // Reset warnings when leave type changes
+    if (name === 'leaveType') {
+      setShowLOPWarning(false);
+      setValidationErrors([]);
+      setIsOtherReason(value === "Others");
     }
   };
 
-  // Form submission handler
-  const submitLeaveRequest = async (event) => {
-    event.preventDefault();
-    console.log(leaveDetails)
+  // Clear success message after 5 seconds
+  useEffect(() => {
+    if (submitSuccess) {
+      const timer = setTimeout(() => {
+        setSubmitSuccess(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [submitSuccess]);
 
-    
-    // Perform actions like form submission or API calls here
+  const validateLeave = async () => {
     try {
-      const response = await fetch("http://192.168.20.6:5000/applyLeave", {
+      const response = await fetch("http://127.0.0.1:5000/leave_management/validate-leave", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(leaveDetails),
+        body: JSON.stringify({
+          ...leaveDetails,
+          reason: leaveDetails.reasonText || leaveDetails.reason
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setValidationErrors([]);
+        return true;
+      } else if (data.errors) {
+        setValidationErrors(data.errors);
+        if (leaveDetails.leaveType === "LOP" && data.errors.some(error => error.includes("Warning: You have leave balance available"))) {
+          setShowLOPWarning(true);
+        }
+        return false;
+      }
+      return true;
+    } catch (error) {
+      console.error("Error validating leave:", error);
+      setValidationErrors(["Error connecting to server. Please try again."]);
+      return false;
+    }
+  };
+
+  const submitLeaveRequest = async (event) => {
+    event.preventDefault();
+    
+    // Always validate first
+    const isValid = await validateLeave();
+    
+    // If LOP warning is shown, we still allow submission
+    // Otherwise, we check if there are validation errors
+    if (!isValid && !showLOPWarning) {
+      return;
+    }
+
+    try {
+      const formData = {
+        ...leaveDetails,
+        reason: leaveDetails.reasonText || leaveDetails.reason
+      };
+
+      const response = await fetch("http://127.0.0.1:5000/leave_management/addleaverequest", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        setleaveDetails({
+        // Reset form and show success message
+        setLeaveDetails({
           fromDate: "",
           toDate: "",
           leaveType: "",
           reason: "",
           reasonText: "",
-          // document: null,
-          employee_id: localStorage.getItem("employee_id"),
+          employee_id: localStorage.getItem("empcode"),
+          familyMember: ""
         });
-        setMsg("Applied Successfully!");
+        setValidationErrors([]);
+        setShowLOPWarning(false);
+        setSubmitSuccess(true);
+        setIsOtherReason(false);
       } else {
-        setMsg("Error submitting the leave request.");
+        const data = await response.json();
+        setValidationErrors([data.error || "Failed to submit leave request"]);
       }
     } catch (error) {
-      setMsg("An error occurred. Please try again.");
-      console.error(error);
+      console.error("Error submitting leave request:", error);
+      setValidationErrors(["Error connecting to server. Please try again."]);
     }
   };
 
   return (
-    <div className="leave-form-container">
-      <form onSubmit={submitLeaveRequest} className="leave-form">
-        {/* Row 1: From and To date inputs */}
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="from-date">From</label>
+    <div className="leave-form-container w-full max-w-2xl mx-auto p-4 border rounded-lg shadow-md bg-white">
+      <h2 className="text-xl font-semibold mb-4">Apply for Leave</h2>
+      
+      {submitSuccess && (
+        <div className="p-3 mb-4 border border-green-500 bg-green-100 text-green-700 rounded">
+          Leave request submitted successfully!
+        </div>
+      )}
+      
+      <form onSubmit={submitLeaveRequest} className="space-y-4">
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">From Date</label>
             <input
               type="date"
-              id="from-date"
               name="fromDate"
               value={leaveDetails.fromDate}
               onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="to-date">To</label>
+          <div>
+            <label className="block text-sm font-medium mb-1">To Date</label>
             <input
               type="date"
-              id="to-date"
               name="toDate"
               value={leaveDetails.toDate}
               onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
             />
           </div>
         </div>
 
-        {/* Row 2: Select Leave Type and Reason */}
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="leave-type">Select Leave Type</label>
+        <div>
+          <label className="block text-sm font-medium mb-1">Leave Type</label>
+          <select
+            name="leaveType"
+            value={leaveDetails.leaveType}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          >
+            <option value="">Select Leave Type</option>
+            {leaveTypes.map(type => (
+              <option key={type.value} value={type.value}>{type.label}</option>
+            ))}
+          </select>
+        </div>
+
+        {leaveDetails.leaveType === "Bereavement Leave" && (
+          <div>
+            <label className="block text-sm font-medium mb-1">Family Member</label>
             <select
-              id="leave-type"
-              name="leaveType"
-              value={leaveDetails.leaveType}
+              name="familyMember"
+              value={leaveDetails.familyMember}
               onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
             >
-              <option value="">Select</option>
-              <option value="Restricted Holiday">Restricted Holiday</option>
-              <option value="Loss of Pay">Loss of Pay</option>
-              {/* <option value="vacation">Vacation Leave</option> */}
-              <option value="Earned Leave">Earned Leave</option>
-              {/* <option value="other">Other</option> */}
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="reason">Select Reason</label>
-            <select
-              id="reason"
-              name="reason"
-              value={leaveDetails.reason}
-              onChange={handleChange}
-            >
-              <option value="">Select</option>
-              <option value="medical">Medical</option>
-              <option value="family">Family Emergency</option>
-              <option value="personal">Personal</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Row 3: Reason for Leave (Text Area) */}
-        <div className="form-row">
-          <div className="form-group text-area-group">
-            <label htmlFor="reason-text">Reason for Leave</label>
-            <textarea
-              id="reason-text"
-              name="reasonText"
-              rows="4"
-              placeholder="Enter the reason for leave"
-              value={leaveDetails.reasonText}
-              onChange={handleChange}
-            ></textarea>
-          </div>
-        </div>
-
-        {/* Row 4: Document Upload */}
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="document">Upload Supporting Document</label>
-            <input
-              type="file"
-              id="document"
-              name="document"
-              onChange={handleChange}
-            />
-            <p style={{ color: msg === "Applied Successfully!" ? "green" : "red" }}>
-              {msg}
-            </p>
-          </div>
-        </div>
-
-        {/* Row 5: Submit Button */}
-        <div className="form-row">
-          <button type="submit" className="submit-button">
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-};
-
-
-
-const restrictedHolidays = [
-  { date: "2024-01-14", occasion: "Makar Sankranti" },
-  { date: "2024-01-26", occasion: "Republic Day" },
-  { date: "2024-03-08", occasion: "Holi" },
-  { date: "2024-04-14", occasion: "Dr. Ambedkar Jayanti" },
-  { date: "2024-04-21", occasion: "Ramadan Eid" },
-  { date: "2024-05-01", occasion: "Labor Day" },
-  { date: "2024-05-23", occasion: "Buddha Purnima" },
-  { date: "2024-07-17", occasion: "Muharram" },
-  { date: "2024-08-15", occasion: "Independence Day" },
-  { date: "2024-10-02", occasion: "Gandhi Jayanti" },
-  { date: "2024-10-31", occasion: "Halloween" },
-  { date: "2024-11-01", occasion: "All Saints' Day" },
-  { date: "2024-12-25", occasion: "Christmas" },
-];
-
-// Filter holidays to include only future dates
-const getFutureHolidays = () => {
-  const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
-  return restrictedHolidays.filter((holiday) => holiday.date >= today);
-};
-
-export const Restrictedholidayform = () => {
-  const [formData, setFormData] = useState({
-    fromDate: "",
-    toDate: "",
-    leaveType: "Restricted Holiday",
-    reason: "",
-    reasonText: "",
-    // document: null,
-    employee_id: localStorage.setItem("employee_id"),
-  });
-
-  const futureHolidays = getFutureHolidays();
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-      toDate : formData.fromDate
-    });
-  };
-
-  
-
-  const submitRestrictedHoliday = async (event) =>{
-    event.preventDefault()
-    // console.log(formData)
-    let leaveDetails = {...formData}
-        console.log( leaveDetails)
-    
-    try {
-      const response = await fetch("http://localhost:5000/applyLeave", {
-        method : 'POST',
-        headers : {
-          'Content-Type' : 'application/json'
-        },
-        body : JSON.stringify(leaveDetails )
-      })
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  return (
-    <div className="res-container">
-      <form onSubmit = {submitRestrictedHoliday} className="leave-form" >
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="select-date">Select Date</label>
-            <select
-              id="select-date"
-              name="fromDate"
-              value={formData.fromDate}
-              onChange={handleChange}
-            >
-              <option value="">Select Date</option>
-              {futureHolidays.map((holiday) => (
-                <option key={holiday.date} value={holiday.date}>
-                  {holiday.date} - {holiday.occasion}
-                </option>
+              <option value="">Select Family Member</option>
+              {familyMembers.map(member => (
+                <option key={member.value} value={member.value}>{member.label}</option>
               ))}
             </select>
           </div>
-          <div className="form-group">
-            <label htmlFor="select-reason">Select Reason</label>
-            <select
-              id="select-reason"
+        )}
+        
+        {isOtherReason && (
+          <div>
+            <label className="block text-sm font-medium mb-1">Please Specify Reason</label>
+            <input
+              type="text"
               name="reason"
-              value={formData.reason}
+              value={leaveDetails.reason}
               onChange={handleChange}
-            >
-              <option value="">Select Reason</option>
-              <option value="medical">Medical</option>
-              <option value="family">Family Emergency</option>
-              <option value="personal">Personal</option>
-              <option value="Going Home">Going Home</option>
-              <option value="other">Other</option>
-            </select>
+              className="w-full p-2 border rounded"
+              required
+              placeholder="Enter specific reason for leave"
+            />
           </div>
+        )}
+
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            {isOtherReason ? "Additional Details" : "Reason for Leave"}
+          </label>
+          <textarea
+            name="reasonText"
+            value={leaveDetails.reasonText}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            rows="4"
+            required
+            placeholder="Provide detailed explanation for your leave request"
+          />
         </div>
-        <div className="form-row">
-          <div className="form-group text-area-group">
-            <label htmlFor="reason-text">Reason for Leave</label>
-            <textarea
-              id="reason-text"
-              name="reasonText"
-              rows="4"
-              placeholder="Enter the reason for leave"
-              value={formData.reasonText}
-              onChange={handleChange}
-            ></textarea>
+
+        {validationErrors.length > 0 && (
+          <div className="p-3 border border-red-500 bg-red-100 text-red-700 rounded">
+            <ul className="list-disc pl-4">
+              {validationErrors.map((error, index) => (
+                <li key={index}>{error}</li>
+              ))}
+            </ul>
           </div>
-        </div>
-        <button type="submit" className="res-submit-button">
-          Submit
+        )}
+
+        {showLOPWarning && (
+          <div className="p-3 border border-yellow-500 bg-yellow-100 text-yellow-700 rounded">
+            You have leave balance available. Are you sure you want to proceed with LOP?
+          </div>
+        )}
+
+        <button
+          type="submit"
+          className="w-full bg-primary text-white p-2 rounded hover:bg-primary-dark"
+        >
+          Submit Leave Request
         </button>
       </form>
     </div>
   );
 };
+
+export default Leaveforms;
+

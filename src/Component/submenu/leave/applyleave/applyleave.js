@@ -1,5 +1,5 @@
 import Balancetable from "../leavebalance/balancetable";
-import {Leaveforms , Restrictedholidayform} from "../applicationFoems/leaveforms";
+import {Leaveforms } from "../applicationFoems/leaveforms";
 import { useState , useEffect } from "react";
 import "./applyleave.css"
 
@@ -16,10 +16,12 @@ const Applyleave = () => {
     
  
   return (<div className="main-leave-container" >
-    <Balancetable onChangeLeavType = {setLeavetypeOnclick}/> 
-    {leavetype !== "restrictedHoliday" ? <Leaveforms/> : <Restrictedholidayform/>}
+    {/* <Balancetable onChangeLeavType = {setLeavetypeOnclick}/>  */}
+    {/* {leavetype !== "restrictedHoliday" && <Leaveforms/>} */}
+    <Leaveforms/>
   </div>
   )
 };
 
 export default Applyleave;
+

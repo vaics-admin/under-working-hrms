@@ -13,7 +13,9 @@
     "@mui/icons-material": "^6.2.1",
     "@mui/joy": "^5.0.0-beta.51",
     "@mui/material": "^6.1.7",
+    "@radix-ui/react-alert-dialog": "^1.1.6",
     "@reduxjs/toolkit": "^2.3.0",
+    "@shadcn/ui": "^0.0.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -21,7 +23,6 @@
     "bootstrap": "^5.3.3",
     "docx": "^9.1.0",
     "file-saver": "^2.0.5",
-    "font": "^0.0.4",
     "font-awesome": "^4.7.0",
     "formik": "^2.4.6",
     "framer-motion": "^11.15.0",
@@ -47,6 +48,7 @@
     "react-tooltip": "^5.28.0",
     "reactstrap": "^9.2.3",
     "redux": "^5.0.1",
+    "tailwindcss": "^4.0.8",
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5",
     "yup": "^1.5.0"
@@ -76,8 +78,10 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "eslint": "^8.57.1",
     "eslint-plugin-react": "^7.37.2",
-    "eslint-plugin-react-hooks": "^5.1.0"
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "font": "^0.0.4"
   }
 }

@@ -107,7 +107,7 @@ const EmployeeDetails = () => {
         };
         console.log('Employee Basic Data:', employeeData);
         try {
-            const response = await fetch('http://localhost:5000/api/employee/basic-details', {
+            const response = await fetch('http://localhost:5000/employee_profile/basic-details', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(employeeData),
@@ -140,7 +140,7 @@ const EmployeeDetails = () => {
         };
         console.log('Employee Other Details Data:', otherDetailsData);
         try {
-            const response = await fetch('http://localhost:5000/api/employee/other-details', {
+            const response = await fetch('http://localhost:5000/employee_profile/other-details', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(otherDetailsData),
