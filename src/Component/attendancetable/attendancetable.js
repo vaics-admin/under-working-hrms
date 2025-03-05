@@ -15,7 +15,7 @@ const AttendanceSummary = () => {
   ];
 
   return (
-    <div className="attendance-container">
+    <div className="attendance-container" style={{width:"450px",marginLeft:'70px'}}>
       <h3 className="attendance-title">
         <a href="#" className="attendance-link">Attendance Summary :</a>
       </h3>

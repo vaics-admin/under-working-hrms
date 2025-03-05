@@ -60,6 +60,7 @@ import TicketForm from './Component/submenu/quicklinks/Raise Ticket/TicketForm';
 import EmployeeDetails from './Component/submenu/quicklinks/Employee profile/EmployeeDetails';
 import PasswordChangeForm from './Component/submenu/quicklinks/Password/Password';
 import ProfilePicture from './Component/submenu/quicklinks/Profilepicture/upload';
+import ReferAFriend from './Component/submenu/quicklinks/Referal/refer';
 
 
 
@@ -90,8 +91,8 @@ function App() {
           <Route path='/IT-Declaration' Component={ITdeclaration}/>
 
           {/* PMS Employee Routes*/}
-          <Route path='/My-Goals' Component={Mygoals}/>
-          <Route path='/My-Appraisal' Component={Appraisal}/>
+          <Route path='/PMS-Employee/My-Goals' Component={Mygoals}/>
+          <Route path='/PMS-Employee/My-Appraisal' Component={Appraisal}/>
 
           <Route path='/admin/get-requests' Component={RequestManagement}/>
 
@@ -125,6 +126,7 @@ function App() {
           <Route path="/Quick-Links/Employee-Profile" element={<EmployeeDetails />} />
           <Route path="/Quick-Links/Change-Password" element={<PasswordChangeForm />} />
           <Route path="/Quick-Links/Profile-Picture-Upload" element={<ProfilePicture />} />
+          <Route path="/Quick-Links/Referal" element={<ReferAFriend/>} />
 
 
           {/* Admin dashbord */}

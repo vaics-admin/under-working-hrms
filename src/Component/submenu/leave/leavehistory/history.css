@@ -1,4 +1,165 @@
-.overflow{
-    overflow: scroll;
-    height: 100vh;
-}
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .history-container {
+    padding: 20px;
+    background-color: #f4f7fa;
+    min-height: 100vh;
+  }
+  
+  /* Error message styling */
+  .error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Year selector container */
+  .year-selector-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .year-label {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .year-input {
+    padding: 8px;
+    font-size: 14px;
+    width: 120px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .year-input:focus {
+    outline: none;
+    border-color: #4CAF50;
+  }
+  
+  .year-selector-container label,
+  .year-selector-container input {
+    display: inline-block;
+  }
+  
+  /* Table container */
+  .table-container {
+    margin-top: 20px;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  /* Table styles */
+  .MuiTable-root {
+    width: 100%;
+  }
+  
+  .MuiTableCell-root {
+    padding: 16px;
+  }
+  
+  .MuiTableHead-root {
+    background-color: #f1f1f1;
+  }
+  
+  .MuiTableHead-cell {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Table Body */
+  .MuiTableBody-root {
+    background-color: #ffffff;
+  }
+  
+  /* Table row styling */
+  .MuiTableRow-root:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .MuiTableRow-root:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .year-selector-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .year-label {
+      margin-bottom: 8px;
+    }
+  
+    .year-input {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+  
+    .MuiTableCell-root {
+      font-size: 14px;
+      padding: 12px;
+    }
+  
+    .MuiTableHead-root {
+      font-size: 14px;
+    }
+  
+    .MuiTableCell-root,
+    .MuiTableHead-root {
+      text-align: left;
+    }
+  
+    .history-container {
+      padding: 10px;
+    }
+  
+    .MuiTable-root {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .year-input {
+      font-size: 12px;
+      padding: 6px;
+    }
+  
+    .MuiTableCell-root {
+      font-size: 12px;
+      padding: 10px;
+    }
+  
+    .year-selector-container {
+      flex-direction: column;
+      margin-bottom: 16px;
+    }
+  
+    .year-label {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+  
+    .history-container {
+      padding: 8px;
+    }
+  
+    .MuiTableCell-root,
+    .MuiTableHead-root {
+      font-size: 12px;
+      text-align: left;
+    }
+  }
+  
+  

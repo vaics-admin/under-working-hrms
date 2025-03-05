@@ -23,9 +23,10 @@ const PasswordChangeForm = () => {
       setError('The new password and confirmation password do not match.');
       return;
     }
-
+    const employeeCode = localStorage.getItem('empcode'); // or however you store it
+  
     try {
-      const response = await fetch('/api/change-password', {
+      const response = await fetch('http://localhost:5000/quicklinks/passwordchange/change-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,6 +34,7 @@ const PasswordChangeForm = () => {
         body: JSON.stringify({
           oldPassword,
           newPassword,
+          employeeCode,
         }),
       });
 
