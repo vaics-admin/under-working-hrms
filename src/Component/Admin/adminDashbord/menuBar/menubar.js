@@ -24,6 +24,7 @@ const AdminMenu = ({ submensofActiveTabs }) => {
               key={index}
               className="admin-menu-button"
               onClick={() =>
+                item.name === "Employee Dashboard" ? navigate(`/shome`) :
                 navigate(
                   `/admin/${queryParams.get("activeButton")}/${item.name
                     .replace(/ /g, "-")

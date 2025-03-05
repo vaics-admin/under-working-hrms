@@ -13,6 +13,7 @@ const AdminTopnav = ({ activeButton, setactiveButton, setsubmensofActiveTabs }) 
       name: "Dashboard",
       subItems: [
         { name: "Admin Dashboard" },
+        { name : "Employee Dashboard" }
       ],
     },
     {
@@ -132,7 +133,7 @@ const AdminTopnav = ({ activeButton, setactiveButton, setsubmensofActiveTabs }) 
     }
   }, [mainSection, subSection, navItems, setactiveButton, setsubmensofActiveTabs]);
 
-  console.log(activeButton)
+
 
   return (
     <ul className="admin-top-nav-bar">
@@ -165,7 +166,7 @@ const AdminTopnav = ({ activeButton, setactiveButton, setsubmensofActiveTabs }) 
                   {
                     each.subItems ? <li
                     className="sublist-button"
-                    onMouseEnter={() => setSecondSubActive(each.name)}
+                    onMouseEnter={() => {setSecondSubActive(each.name) ; }}
                     
                   >
                     {each.name}
@@ -175,7 +176,7 @@ const AdminTopnav = ({ activeButton, setactiveButton, setsubmensofActiveTabs }) 
                     onClick={() => {
                       setactiveButton(item.name);
                       setsubmensofActiveTabs(item.subItems);
-                      navigate(`/admin/${item.name.replace(/ /g, "-").toLowerCase()}/${each.name.replace(/ /g, "-").toLowerCase()}`);
+                      each.name === "Employee Dashboard" ? navigate (`/shome`) : navigate(`/admin/${item.name.replace(/ /g, "-").toLowerCase()}/${each.name.replace(/ /g, "-").toLowerCase()}`);
                     }}
                   >
                     {each.name}
@@ -190,6 +191,7 @@ const AdminTopnav = ({ activeButton, setactiveButton, setsubmensofActiveTabs }) 
                               setactiveButton(item.name);
                               setsubmensofActiveTabs(each.subItems);
                               navigate(`/admin/${item.name.replace(/ /g, "-").toLowerCase()}/${submenu.name.replace(/ /g, "-").toLowerCase()}`);
+                              
                             }}
                             className="second-sub-list-button"
                           >

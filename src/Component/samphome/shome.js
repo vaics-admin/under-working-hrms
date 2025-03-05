@@ -7,6 +7,7 @@ import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { IoIosLink } from "react-icons/io";
 import { FaShieldAlt } from 'react-icons/fa';
 import { useState } from "react";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AttendanceCalendar from "../calander/calander";
 import Onduty from '../submenu/attendance/applyOnDuty/onduty';
 import { Provider } from 'react-redux';
@@ -74,6 +75,8 @@ const Shome = () =>{
     const [activeTab , setActiveTab] = useState(tabDetails)
     const [isActive , setIsactive] = useState(false)
     const [activeSubmenu , setActivesubmenu] = useState("")
+    const [user , switchUser] = useState(false)
+    console.log(user)
     const navigate = useNavigate()
     const moveTopage = (button , name) =>{
         console.log(button, name)
@@ -150,7 +153,15 @@ console.log('Employee ID:', employeeId);
         </div>
 
         <div className="headerAndContent-container">
-          <div className="header"></div>
+         
+            <AccountCircleIcon className="account-icon"  onClick = {() => {switchUser(!user)}}/>
+
+              {
+                user && <ul className="user-list">
+                  <button className='switch-button' onClick={ () => navigate(`/admin/dashboard/admin-dashboard?activeButton=Dashboard&submensofActiveTabs=%5B%7B"name"%3A"Admin+Dashboard"%7D%2C%7B"name"%3A"Employee+Dashboard"%7D%5D`)}>Switch to Admin</button>
+                </ul>
+              }
+  
 
           <div className="content">
             <div className="first-half">
